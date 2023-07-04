@@ -32,9 +32,8 @@ namespace AppUTH.Service
         public UsuarioRepositorio()
         {
             authProvider = new FirebaseAuthProvider(new FirebaseConfig(webapikey));
-           
-
         }
+
         public async Task<bool> Register(string email, string nombre, string clave)
         {
             var token = await authProvider.CreateUserWithEmailAndPasswordAsync(email, clave, nombre);
@@ -43,8 +42,8 @@ namespace AppUTH.Service
                 return true;
             }
             return false;
+        } 
 
-        }
         public async Task<string> SignIn(string email, string clave)
         {
             var token = await authProvider.SignInWithEmailAndPasswordAsync(email, clave);
@@ -52,9 +51,7 @@ namespace AppUTH.Service
             {
                 return token.FirebaseToken;
             }
-
             return "";
-
         }
 
         public async Task<string> Getrole(string c)

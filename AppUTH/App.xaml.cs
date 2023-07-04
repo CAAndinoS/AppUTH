@@ -11,7 +11,7 @@ namespace AppUTH
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new PageRegistro());
+            MainPage = new NavigationPage(new PageLogin());
         }
 
         protected override void OnStart()

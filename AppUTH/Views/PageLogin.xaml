@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppUTH.Views.PageLogin">
+    <ContentPage.Content>
+        <StackLayout Padding="15"
+                     VerticalOptions="Center">
+            <Label Text="Inicio De Sesión"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="Black"/>
+
+            <Entry Placeholder="Escribe Tu Correo:" PlaceholderColor="Black" TextColor="Black"
+                   x:Name="txtemail" BackgroundColor="White"/>
+            <Entry Placeholder="Escribe Tu Clave:" BackgroundColor="White" PlaceholderColor="Black" TextColor="Black"
+                   x:Name="txtclave"
+                   IsPassword="True"></Entry>
+            <Button Text="Iniciar De Sesión "
+                    x:Name="BtnSigIn"
+                    CornerRadius="15"
+                    BackgroundColor="Orange"
+                    BorderColor="White"
+                    Clicked="BtnSigIn_Clicked">
+            </Button>
+
+
+            <Grid Margin="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="REGISTRATE"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       TextColor="Black"
+                       HorizontalOptions="Center"
+                       FontSize="19"
+                       x:Name="lbregister">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            x:Name="registertap"
+                            Tapped="registertap_Tapped">
+
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+
+                </Label>
+
+
+                <Label Text="¿OLVIDO SU CONTRASEÑA?"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       TextColor="Black"
+                       HorizontalOptions="Center"
+                       FontSize="18">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            x:Name="recuperarclavetap"
+                            Tapped="recuperarclavetap_Tapped">
+
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+
+                </Label>
+
+
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

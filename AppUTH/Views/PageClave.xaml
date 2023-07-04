@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppUTH.Views.PageClave">
+    <ContentPage.Content>
+        <StackLayout Padding="15"
+                     VerticalOptions="Center">
+            <Label Text="Recuperar Contraseña:"
+                   FontSize="Large"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   TextColor="Black">
+            </Label>
+            <Entry Placeholder="Ingresa Tu Email:"
+                   BackgroundColor="White"
+                   PlaceholderColor="Black"
+                   x:Name="txtemail"></Entry>
+            <Button Text="Recuperar Clave"
+                    x:Name="Buttonlink"
+                    CornerRadius="30"
+                    BackgroundColor="Orange"
+                    Clicked="Buttonlink_Clicked">
+            </Button>
+
+            <Button Text="Inicio De Sesión"
+                    BackgroundColor="Orange"
+                    CornerRadius="30"
+                    x:Name="Buttonlink_1"
+                    Clicked="Buttonlink_1_Clicked">
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
