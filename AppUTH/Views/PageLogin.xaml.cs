@@ -38,7 +38,7 @@ namespace AppUTH.Views
             switch (rol)
             {
                 case "ALUMNO":
-                    await Navigation.PushAsync(new Views.Page1());
+                    await Navigation.PushAsync(new Views.Menu.PageMenu());
                     break;
 
                 case "PROFESOR":

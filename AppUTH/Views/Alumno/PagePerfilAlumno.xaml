@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppUTH.Views.Alumno.PagePerfilAlumno">
+    <ScrollView>
+        <StackLayout BackgroundColor="White"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            WidthRequest="600" HeightRequest="1200">
+            <Label Text="Perfil Cliente"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                   FontSize="42"
+                   Margin="30"
+                   FontAttributes="Bold"
+                   TextColor="Orange"/>
+
+            <StackLayout >
+                <Image x:Name="Foto" BackgroundColor="Black" Margin="50" WidthRequest="200" HeightRequest="350"/>
+                <Button x:Name="btnFoto" 
+                Text="Tomar Foto" 
+                    Grid.Column="0" 
+                   Grid.Row="3"
+                    BackgroundColor="Orange"
+                    TextColor="White"
+                    FontSize="16"
+                    CornerRadius="30"
+                     TextTransform="None"
+                    Margin="30,0,30,50"   
+                Clicked="btnFoto_Clicked"/>
+            </StackLayout>
+
+            <Entry Placeholder="Nombre.."
+                   x:Name="txtnombre"
+                   PlaceholderColor="Orange"
+                   TextColor="Black"
+                   Margin="30,0,30,20"
+                   ></Entry>
+            <Entry Placeholder="Email.."
+                   x:Name="txtemail"
+                    PlaceholderColor="Orange"
+                   TextColor="Black"
+                   Margin="30,0,30,20"
+                   IsReadOnly="True"></Entry>
+            <Entry Placeholder="Telefono.."
+                   x:Name="txttelefono"
+                   PlaceholderColor="Orange"
+                   TextColor="Black"
+                   Margin="30,0,30,20"
+                   Keyboard="Numeric"
+                   MaxLength="8"></Entry>
+            <Entry Placeholder="Direccion.."
+                   PlaceholderColor="Orange"
+                   TextColor="Black"
+                   x:Name="txtdireccion"
+                   Margin="30,0,30,20"></Entry>
+
+
+            <Button Text="Actualizar" x:Name="Buttoactualizar"
+                    Grid.Column="0" 
+                   Grid.Row="3"
+                    BackgroundColor="Orange"
+                    TextColor="White"
+                    FontSize="16"
+                    CornerRadius="30"
+                     TextTransform="None"
+                    Margin="30,0,30,50" 
+                Clicked="Buttoactualizar_Clicked"></Button>
+
+        </StackLayout>
+
+
+    </ScrollView>
+</ContentPage>
