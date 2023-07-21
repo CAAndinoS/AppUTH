@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppUTH.Views.Menu_Grupos.PageMenuGrupos">
+  <!--Pages can be added as references or inline-->
+  <ContentPage Title="Tab 1">
+        <StackLayout Margin="20">
+            <Entry x:Name="GroupNameEntry" Placeholder="Nombre del grupo" />
+            <Button Text="Crear Grupo" Clicked="OnCreateGroupClicked" />
+        </StackLayout>
+  </ContentPage>
+    
+  <ContentPage Title="Tab 2">
+        <StackLayout>
+            <ListView x:Name="ListaGrupos" ItemsSource="{Binding}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Unirse" BackgroundColor="Green" CommandParameter="{Binding .}" Invoked="OnUnirseInvoked" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+
+                                <StackLayout Padding="10">
+                                    <Label Text="{Binding Name}" VerticalOptions="CenterAndExpand" />
+                                </StackLayout>
+                            </SwipeView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+  </ContentPage>
+    
+    
+    
+    <ContentPage Title="Tab 3">
+        <ListView x:Name="GruposInscritosListView"
+              HasUnevenRows="True"
+              ItemSelected="OnGrupoSeleccionado">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage>
+</TabbedPage>

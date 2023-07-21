@@ -19,9 +19,6 @@ namespace AppUTH.Service
 
         public async Task UpdatePerfil(Alumno perfil)
         {
-            /*var toUpdatePerfil = (await firebaseperfil
-                .Child("clientes")
-                .OnceAsync<Cliente>()).Where(a => a.Object.Correo == perfil1.Correo).FirstOrDefault();*/
             if (Clientekey != null)
             {
                 await firebaseperfil
@@ -32,13 +29,7 @@ namespace AppUTH.Service
         }
 
         public async Task<Alumno> ObtenerAlumno(string correo)
-        {
-            /*var cliente = (await firebaseperfil
-                            .Child("clientes")
-                            .OnceAsync<Cliente>()).Where(a => a.Object.Correo == correo).FirstOrDefault();
-
-            return cliente.Object;*/
-
+        {          
             var clientes = (await firebaseperfil
             .Child("alumnos")
                             .OnceAsync<Alumno>()).Select(c => {

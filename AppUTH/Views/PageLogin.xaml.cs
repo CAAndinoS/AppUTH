@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Firebase.Database;
 using Xamarin.Essentials;
+using AppUTH.Singleton;
 
 namespace AppUTH.Views
 {
@@ -77,6 +78,7 @@ namespace AppUTH.Views
                     Preferences.Set("token", token);
                     Preferences.Set("userEmail", email);
                     Palyer(email);
+                    UserData.CurrentUserEmail = email;
                 }
                 else
                 {
