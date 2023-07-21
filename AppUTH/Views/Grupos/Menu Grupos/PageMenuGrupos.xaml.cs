@@ -42,9 +42,9 @@ namespace AppUTH.Views.Menu_Grupos
             Group group = new Group { Name = groupName };
             await SaveGroup(group);
             LoadGroups();
-            await DisplayAlert("Éxito", "Grupo creado y te has unido como participante.", "OK");
-            /*
-             
+            await DisplayAlert("Éxito", "Grupo creado", "OK");
+
+            /*            
             // Obtener el perfil del usuario actual (creador del grupo)
             string currentUserEmail = UserData.CurrentUserEmail;
             Models.Alumno currentUserProfile = await perfilRepositorio.ObtenerAlumno(currentUserEmail);
