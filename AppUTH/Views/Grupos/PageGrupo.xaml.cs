@@ -4,6 +4,7 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using Firebase.Storage;
 using Newtonsoft.Json;
+using Plugin.AudioRecorder;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
@@ -12,7 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -28,6 +29,10 @@ namespace AppUTH.Views.Grupos
         
         String video = "";
 
+        private AudioRecorderService audioRecorderService = new AudioRecorderService();
+        private readonly AudioPlayer audioPlayer = new AudioPlayer();
+        public string pathaudio, filename;
+
         public PageGrupo(Models.Group grupoSeleccionado)
         {
             InitializeComponent();
@@ -41,40 +46,7 @@ namespace AppUTH.Views.Grupos
             await Navigation.PopAsync();
         }
         //-----------
-        public String Getimage64()
-        {
-            if (photo != null)
-            {
-                using (MemoryStream memory = new MemoryStream())
-                {
-                    Stream stream = photo.GetStream();
-                    stream.CopyTo(memory);
-                    byte[] fotobyte = memory.ToArray();
-
-                    String Base64 = Convert.ToBase64String(fotobyte);
-
-                    return Base64;
-                }
-            }
-            return null;
-        }
-
-        public byte[] GetimageBytes()
-        {
-            if (photo != null)
-            {
-                using (MemoryStream memory = new MemoryStream())
-                {
-                    Stream stream = photo.GetStream();
-                    stream.CopyTo(memory);
-                    byte[] fotobyte = memory.ToArray();
-
-                    return fotobyte;
-                }
-            }
-            return null;
-        }
-
+        
         private async void OnTakePhotoButtonClicked(object sender, EventArgs e)
         {
             photo = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
@@ -118,20 +90,20 @@ namespace AppUTH.Views.Grupos
                 // En este caso, simplemente utilizamos una cadena vacía para el nombre del usuario.
             }
 
-            // Convertir la foto a Base64
-            string fotoBase64 = Getimage64();
+            // Subir la foto al almacenamiento de Firebase
+            string fotoUrl = await UploadPhotoToStorage(photo.GetStream());
 
-            if (string.IsNullOrEmpty(fotoBase64))
+            if (string.IsNullOrEmpty(fotoUrl))
             {
-                await DisplayAlert("Error", "La foto no pudo convertirse a Base64.", "OK");
+                await DisplayAlert("Error", "Error al subir la foto al almacenamiento.", "OK");
                 return;
             }
 
-            // Agregar la nueva foto a la lista de fotos del grupo con el campo adicional "foto"
+            // Agregar la nueva foto y su URL a la lista de fotos del grupo
             grupoSeleccionado.Photos.Add(new PhotoEntry
             {
                 UploadedBy = currentUserName,
-                FotoBase64 = fotoBase64,
+                FotoUrl = fotoUrl,
                 Foto = "Foto"
             });
 
@@ -149,6 +121,24 @@ namespace AppUTH.Views.Grupos
 
             await DisplayAlert("Éxito", "Foto subida correctamente.", "OK");
         }
+
+        private async Task<string> UploadPhotoToStorage(Stream photoStream)
+        {
+            try
+            {
+                var firebaseStorage = new FirebaseStorage("apputh-b2336.appspot.com");
+                var storageReference = firebaseStorage.Child("photos").Child($"photo_{DateTime.Now.Ticks}.jpg");
+
+                var task = await storageReference.PutAsync(photoStream);
+                return await storageReference.GetDownloadUrlAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al subir la foto al almacenamiento: " + ex.Message);
+                return null;
+            }
+        }
+
 
 
         private async Task UpdateGroup(Models.Group group)
@@ -257,6 +247,56 @@ namespace AppUTH.Views.Grupos
                 Console.WriteLine("Error al subir el video al almacenamiento: " + ex.Message);
                 return null;
             }
+        }
+
+
+        //-----------------------------------------
+        private async void OnStartRecordingAudioButtonClicked(object sender, EventArgs e)
+        {
+            var permiso = await Permissions.RequestAsync<Permissions.Microphone>();
+            var permiso1 = await Permissions.RequestAsync<Permissions.StorageRead>();
+            var permiso2 = await Permissions.RequestAsync<Permissions.StorageWrite>();
+            
+            if (permiso != PermissionStatus.Granted & permiso1 != PermissionStatus.Granted & permiso2 != PermissionStatus.Granted)
+            {
+                return;
+
+            }
+
+            if (audioRecorderService.IsRecording)
+            {
+                await audioRecorderService.StopRecording();
+                audioPlayer.Play(audioRecorderService.GetAudioFilePath());
+            }
+            else
+            {
+                await audioRecorderService.StartRecording();
+            }
+        }
+
+        private async void OnStopRecordingAudioButtonClicked(object sender, EventArgs e)
+        {
+            if (audioRecorderService.IsRecording)
+            {
+                await audioRecorderService.StopRecording();               
+            }
+            else
+            {
+                await audioRecorderService.StartRecording();
+            }
+        }
+
+        private async void OnPlayAudioButtonClicked(object sender, EventArgs e)
+        {
+            if (await DisplayAlert("Lista Audio", "Desea Reproducir Audio", "Si", "No"))
+            {
+                audioPlayer.Play(audioRecorderService.GetAudioFilePath());
+            }
+        }
+
+        private void OnUploadAudioButtonClicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

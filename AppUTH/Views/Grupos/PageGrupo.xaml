@@ -25,8 +25,16 @@
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <Button Text="Tomar Video" Clicked="OnTakeVideoButtonClicked" />
             <Button Text="Subir Video" Clicked="OnUploadVideoButtonClicked" />
-            <!-- Agregar el VideoView para mostrar la vista previa del video -->
             <mm:VideoView x:Name="videoPreview" HeightRequest="300" WidthRequest="200" BackgroundColor="#A9BFC4" IsFullWindow="False" ShowControls="True" Margin="10,10,10,0" />
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage Title="Tab 4">
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Button Text="Grabar Audio" Clicked="OnStartRecordingAudioButtonClicked" />
+            <Button Text="Detener Grabación" Clicked="OnStopRecordingAudioButtonClicked" />
+            <Button Text="Reproducir Audio" Clicked="OnPlayAudioButtonClicked" />
+            <Button Text="Subir Audio" Clicked="OnUploadAudioButtonClicked" />
         </StackLayout>
     </ContentPage>
 </TabbedPage>
