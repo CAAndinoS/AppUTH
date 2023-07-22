@@ -1,5 +1,7 @@
-﻿using AppUTH.Service;
+﻿using AppUTH.Models;
+using AppUTH.Service;
 using AppUTH.Singleton;
+using AppUTH.Views.Grupos;
 using Firebase.Database;
 using Firebase.Database.Query;
 using Newtonsoft.Json;
@@ -39,32 +41,15 @@ namespace AppUTH.Views.Menu_Grupos
             }
 
             // Crear el grupo y guardar en Firebase
-            Group group = new Group { Name = groupName };
+            Models.Group group = new Models.Group { Name = groupName };
             await SaveGroup(group);
             LoadGroups();
             await DisplayAlert("Éxito", "Grupo creado", "OK");
 
-            /*            
-            // Obtener el perfil del usuario actual (creador del grupo)
-            string currentUserEmail = UserData.CurrentUserEmail;
-            Models.Alumno currentUserProfile = await perfilRepositorio.ObtenerAlumno(currentUserEmail);
-
-            // Agregar al creador del grupo a la lista de participantes
-            if (currentUserProfile != null)
-            {
-                group.Participants.Add(new Participant { IdAlumno = currentUserProfile.IdAlumno, NombreAlumno = currentUserProfile.NombreAlumno });
-                await UpdateGroup(group); // Guardar el grupo actualizado en Firebase
-                await DisplayAlert("Éxito", "Grupo creado y te has unido como participante.", "OK");
-                LoadGroups(); // Actualizar la lista de grupos después de crear uno nuevo
-            }
-            else
-            {
-                await DisplayAlert("Error", "No se pudo encontrar el perfil del usuario.", "OK");
-            }
-            */
+            
         }
 
-        private async Task SaveGroup(Group group)
+        private async Task SaveGroup(Models.Group group)
         {
             var data = await firebaseClient.Child("grupos").PostAsync(JsonConvert.SerializeObject(group));
             if (!string.IsNullOrEmpty(data.Key))
@@ -77,7 +62,7 @@ namespace AppUTH.Views.Menu_Grupos
         private async void OnUnirseInvoked(object sender, EventArgs e)
         {
             var swipeItem = (SwipeItem)sender;
-            var grupoSeleccionado = (Group)swipeItem.CommandParameter;
+            var grupoSeleccionado = (Models.Group)swipeItem.CommandParameter;
 
             // Obtener el correo electrónico del usuario actual desde la clase UserData
             string currentUserEmail = UserData.CurrentUserEmail;
@@ -119,7 +104,7 @@ namespace AppUTH.Views.Menu_Grupos
             }
         }
 
-        private async Task UpdateGroup(Group group)
+        private async Task UpdateGroup(Models.Group group)
         {
             await firebaseClient.Child("grupos").Child(group.IdGrupo).PutAsync(JsonConvert.SerializeObject(group));
         }
@@ -127,7 +112,7 @@ namespace AppUTH.Views.Menu_Grupos
 
         private async void LoadGroups()
         {
-            var gruposData = await firebaseClient.Child("grupos").OnceAsync<Group>();
+            var gruposData = await firebaseClient.Child("grupos").OnceAsync<Models.Group>();
             var grupos = gruposData.Select(grupoData =>
             {
                 var grupo = grupoData.Object;
@@ -145,7 +130,7 @@ namespace AppUTH.Views.Menu_Grupos
             string currentUserEmail = UserData.CurrentUserEmail;
 
             // Obtener los grupos en los que el usuario está inscrito
-            var gruposData = await firebaseClient.Child("grupos").OnceAsync<Group>();
+            var gruposData = await firebaseClient.Child("grupos").OnceAsync<Models.Group>();
             var gruposInscritos = gruposData.Select(grupoData =>
             {
                 var grupo = grupoData.Object;
@@ -162,24 +147,11 @@ namespace AppUTH.Views.Menu_Grupos
             if (e.SelectedItem == null)
                 return;
 
-            var grupoSeleccionado = (Group)e.SelectedItem;
-            //await Navigation.PushAsync(new PageDetalleGrupo(grupoSeleccionado));
+            var grupoSeleccionado = (Models.Group)e.SelectedItem;
+            await Navigation.PushAsync(new PageGrupo(grupoSeleccionado));
 
             // Desmarcar el elemento seleccionado en la lista
             ((ListView)sender).SelectedItem = null;
         }
-    }
-    public class Group
-    {
-        public string IdGrupo { get; set; }
-        public string Name { get; set; }
-        public List<Participant> Participants { get; set; } = new List<Participant>();
-    }
-
-    public class Participant
-    {
-        public int IdAlumno { get; set; }
-        public string NombreAlumno { get; set; }
-        public string CorreoAlumno { get; set; }
-    }
+    }   
 }

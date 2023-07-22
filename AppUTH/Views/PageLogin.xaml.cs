@@ -79,6 +79,7 @@ namespace AppUTH.Views
                     Preferences.Set("userEmail", email);
                     Palyer(email);
                     UserData.CurrentUserEmail = email;
+                    UserData.FirebaseToken = token;
                 }
                 else
                 {

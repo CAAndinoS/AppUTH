@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+            xmlns:mm="clr-namespace:MediaManager.Forms;assembly=MediaManager.Forms"
+            x:Class="AppUTH.Views.Grupos.PageGrupo">
+  <!--Pages can be added as references or inline-->
+  <ContentPage Title="Tab 1">
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Label x:Name="LabelNombreGrupo" FontSize="24" Margin="0,20" />
+            <Label x:Name="LabelCantidadPersonas" FontSize="18" Margin="0,5" />
+            <Button Text="Cerrar" Clicked="OnCloseButtonClicked" BackgroundColor="Gray" TextColor="White" Margin="20,0" />
+        </StackLayout>
+  </ContentPage>
+  
+    
+  <ContentPage Title="Tab 2">
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Image x:Name="imagePreview" HeightRequest="200" WidthRequest="200" Margin="0,20" />
+            <Button Text="Tomar Foto" Clicked="OnTakePhotoButtonClicked" />
+            <Button x:Name="BtnUploadPhoto" Text="Subir Foto" Clicked="OnUploadPhotoButtonClicked" />
+        </StackLayout>
+    </ContentPage>
+    
+  <ContentPage Title="Tab 3">
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Button Text="Tomar Video" Clicked="OnTakeVideoButtonClicked" />
+            <Button Text="Subir Video" Clicked="OnUploadVideoButtonClicked" />
+            <!-- Agregar el VideoView para mostrar la vista previa del video -->
+            <mm:VideoView x:Name="videoPreview" HeightRequest="300" WidthRequest="200" BackgroundColor="#A9BFC4" IsFullWindow="False" ShowControls="True" Margin="10,10,10,0" />
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>
