@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppUTH.Views.Grupos.Multimedia.PageAudio">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Label Text="Reproduciendo audio" HorizontalOptions="CenterAndExpand" />
+            <Button Text="Reproducir" Clicked="PlayAudio_Clicked" />
+            <Button Text="Detener" Clicked="StopAudio_Clicked" />
+            <Button Text="Descargar Audio" Clicked="OnDownloadButtonClicked" />
+            <ProgressBar x:Name="progressBar" Progress="0" IsVisible="False" IsEnabled="False" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

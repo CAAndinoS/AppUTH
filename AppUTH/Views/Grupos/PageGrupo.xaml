@@ -37,4 +37,35 @@
             <Button Text="Subir Audio" Clicked="OnUploadAudioButtonClicked" />
         </StackLayout>
     </ContentPage>
+
+    <ContentPage Title="Tab 5">
+        <StackLayout>
+            <ListView x:Name="listViewMultimedia" ItemsSource="{Binding Multimedia}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem Text="Ver" IconImageSource="eye.png" BackgroundColor="LightSkyBlue"
+                                                   Command="{Binding Source={x:Reference listViewMultimedia}, Path=BindingContext.ViewMultimediaCommand}"
+                                                   CommandParameter="{Binding .}"/>
+                                            <SwipeItem Text="Eliminar" IconImageSource="trash.png" BackgroundColor="IndianRed"
+                                                   Command="{Binding Source={x:Reference listViewMultimedia}, Path=BindingContext.DeleteMultimediaCommand}"
+                                                   CommandParameter="{Binding .}"/>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <StackLayout Padding="10">
+                                        <Label Text="{Binding Type}" FontSize="18" />
+                                        <Label Text="{Binding UploadedBy}" FontSize="14" />
+                                    </StackLayout>
+                                </SwipeView>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
 </TabbedPage>

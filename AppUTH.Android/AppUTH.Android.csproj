@@ -67,6 +67,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
     </PackageReference>
+    <PackageReference Include="Octane.Xam.VideoPlayer">
+      <Version>3.1.0</Version>
+    </PackageReference>
     <PackageReference Include="Plugin.AudioRecorder">
       <Version>1.1.0</Version>
     </PackageReference>
@@ -76,8 +79,14 @@
     <PackageReference Include="SkiaSharp">
       <Version>2.88.3</Version>
     </PackageReference>
+    <PackageReference Include="Xam.Plugin.DownloadManager">
+      <Version>1.0.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>6.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer">
+      <Version>1.6.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.7" />
@@ -109,9 +118,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\AppUTH\AppUTH.csproj">
       <Project>{D2E8CD2E-0050-4786-9CEC-0ADC5280C89F}</Project>
       <Name>AppUTH</Name>
@@ -119,6 +125,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\xml\file_paths.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\eye.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
