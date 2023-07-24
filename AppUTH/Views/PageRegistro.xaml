@@ -1,37 +1,85 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppUTH.Views.PageRegistro">
+             x:Class="AppUTH.Views.PageRegistro"
+             Background="#C9E0C3">
     <ContentPage.Content>
-        <StackLayout
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            WidthRequest="420">
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="CenterAndExpand"
+                     WidthRequest="420"
+                     Spacing="20"
+                     BackgroundColor="#C9E0C3">
+
             <Label Text="Registrar Usuario"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
                    FontSize="Large"
                    FontAttributes="Bold"
-                   TextColor="Black"/>
+                   TextColor="Black" />
 
-            <Entry Placeholder="Nombre" BackgroundColor="White" PlaceholderColor="Black" TextColor="Black" 
-                   x:Name="txtnombre" ></Entry>
-            <Entry Placeholder="Email" BackgroundColor="White" PlaceholderColor="Black" TextColor="Black"
-                   x:Name="txtemail"></Entry>
-            <Entry Placeholder="Clave" BackgroundColor="White" PlaceholderColor="Black" TextColor="Black"
-                   IsPassword="True"
-                   x:Name="txtclave"></Entry>
-            <Entry IsPassword="True" 
-                   Placeholder="Confirmar Clave" BackgroundColor="White" PlaceholderColor="Black" TextColor="Black"
-                   x:Name="txtconfirmclave"></Entry>
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5">
+                <Entry Placeholder="Nombre"
+                       BackgroundColor="Transparent"
+                       PlaceholderColor="Black"
+                       TextColor="Black" 
+                       x:Name="txtnombre" />
+            </Frame>
 
-            <Button Text="Registrar" x:Name="Buttonregistro" BackgroundColor="Orange" CornerRadius="30"
-                Clicked="Buttonregistro_Clicked"></Button>
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5">
+                <Entry Placeholder="Email"
+                       BackgroundColor="Transparent"
+                       PlaceholderColor="Black"
+                       TextColor="Black"
+                       x:Name="txtemail" />
+            </Frame>
 
-            <Button Text="Inicio De Sesión" x:Name="Buttonlogin" BackgroundColor="Orange" CornerRadius="30"
-                Clicked="Buttonlogin_Clicked"></Button>
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5">
+                <Entry Placeholder="Clave"
+                       BackgroundColor="Transparent"
+                       PlaceholderColor="Black"
+                       TextColor="Black"
+                       IsPassword="True"
+                       x:Name="txtclave" />
+            </Frame>
 
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5">
+                <Entry IsPassword="True" 
+                       Placeholder="Confirmar Clave"
+                       BackgroundColor="Transparent"
+                       PlaceholderColor="Black"
+                       TextColor="Black"
+                       x:Name="txtconfirmclave" />
+            </Frame>
 
+            <Button Text="Registrar"
+                    x:Name="Buttonregistro"
+                    BackgroundColor="#EF7D00"
+                    CornerRadius="30"
+                    Clicked="Buttonregistro_Clicked"
+                    TextColor="White"
+                    HeightRequest="50"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center" />
+
+            <Button Text="Inicio De Sesión"
+                    x:Name="Buttonlogin"
+                    BackgroundColor="#EF7D00"
+                    CornerRadius="30"
+                    Clicked="Buttonlogin_Clicked"
+                    TextColor="White"
+                    HeightRequest="50"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

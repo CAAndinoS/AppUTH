@@ -1,31 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppUTH.Views.Menu_Grupos.PageMenuGrupos">
+             x:Class="AppUTH.Views.Menu_Grupos.PageMenuGrupos"
+            BarBackgroundColor="#00843D"
+             BarTextColor="White">
   <!--Pages can be added as references or inline-->
-  <ContentPage Title="Tab 1">
+    <ContentPage Title="Creación"
+             BackgroundColor="#C9E0C3">
         <StackLayout Margin="20">
-            <Entry x:Name="GroupNameEntry" Placeholder="Nombre del grupo" />
-            <Button Text="Crear Grupo" Clicked="OnCreateGroupClicked" />
+            <Entry x:Name="GroupNameEntry"
+               Placeholder="Nombre del grupo"
+               BackgroundColor="#C9E0C3"
+               PlaceholderColor="Gray"
+               TextColor="Black"
+               FontSize="18"
+               Margin="0,0,0,20" />
+            <Button Text="Crear Grupo"
+                Clicked="OnCreateGroupClicked"
+                BackgroundColor="#EF7D00"
+                TextColor="White"
+                FontSize="20"
+                CornerRadius="10" />
         </StackLayout>
-  </ContentPage>
-    
-  <ContentPage Title="Tab 2">
+    </ContentPage>
+
+    <ContentPage Title="Agrega"
+             BackgroundColor="#C9E0C3">
         <StackLayout>
-            <ListView x:Name="ListaGrupos" ItemsSource="{Binding}">
+            <ListView x:Name="ListaGrupos"
+                  ItemsSource="{Binding}"
+                  BackgroundColor="#C9E0C3">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <SwipeView>
+                            <SwipeView BackgroundColor="#C9E0C3">
                                 <SwipeView.RightItems>
                                     <SwipeItems>
-                                        <SwipeItem Text="Unirse" IconImageSource="unir.png" BackgroundColor="Green" CommandParameter="{Binding .}" Invoked="OnUnirseInvoked" />
-                                        <SwipeItem Text="Eliminar" IconImageSource="trash.png" BackgroundColor="Red" CommandParameter="{Binding .}" Invoked="OnEliminarInvoked" />
+                                        <SwipeItem Text="Unirse"
+                                               IconImageSource="unir.png"
+                                               BackgroundColor="Green"
+                                               CommandParameter="{Binding .}"
+                                               Invoked="OnUnirseInvoked" />
+                                        <SwipeItem Text="Eliminar"
+                                               IconImageSource="trash.png"
+                                               BackgroundColor="Red"
+                                               CommandParameter="{Binding .}"
+                                               Invoked="OnEliminarInvoked" />
                                     </SwipeItems>
                                 </SwipeView.RightItems>
 
                                 <StackLayout Padding="10">
-                                    <Label Text="{Binding Name}" VerticalOptions="CenterAndExpand" />
+                                    <Label Text="{Binding Name}"
+                                       VerticalOptions="CenterAndExpand"
+                                       TextColor="Black"
+                                       FontSize="18" />
                                 </StackLayout>
                             </SwipeView>
                         </ViewCell>
@@ -33,19 +61,22 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-  </ContentPage>
-    
-    
-    
-    <ContentPage Title="Tab 3">
+    </ContentPage>
+
+    <ContentPage Title="Grupos"
+             BackgroundColor="#C9E0C3">
         <ListView x:Name="GruposInscritosListView"
               HasUnevenRows="True"
+              BackgroundColor="#C9E0C3"
               ItemSelected="OnGrupoSeleccionado">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" />
+                    <TextCell Text="{Binding Name}"
+                          TextColor="Black"
+                           />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </ContentPage>
+
 </TabbedPage>

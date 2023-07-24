@@ -36,13 +36,32 @@ namespace AppUTH.Service
 
         public async Task<bool> Register(string email, string nombre, string clave)
         {
-            var token = await authProvider.CreateUserWithEmailAndPasswordAsync(email, clave, nombre);
-            if (!string.IsNullOrEmpty(token.FirebaseToken))
+            try
             {
-                return true;
+                // Crea el usuario en Firebase Authentication
+                var token = await authProvider.CreateUserWithEmailAndPasswordAsync(email, clave, nombre);
+                if (!string.IsNullOrEmpty(token.FirebaseToken))
+                {
+                    // Envía el correo de verificación
+                    var user = token.FirebaseToken;
+                    await authProvider.SendEmailVerificationAsync(user);
+
+                    // Aquí podrías mostrar un mensaje al usuario para informarle que se ha enviado un correo de verificación.
+                    // Puedes usar Toast o algún otro mecanismo de notificación en Xamarin Forms Android.
+
+                    return true;
+                }
+
+                return false;
             }
-            return false;
-        } 
+            catch (FirebaseAuthException ex)
+            {
+                // Manejar errores de autenticación aquí, si es necesario.
+                // Por ejemplo, si el correo ya está registrado, FirebaseAuthentication.net lanzará una FirebaseAuthException.
+                // Puedes mostrar un mensaje al usuario informando sobre el error.
+                return false;
+            }
+        }
 
         public async Task<string> SignIn(string email, string clave)
         {

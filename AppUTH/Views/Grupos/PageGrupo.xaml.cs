@@ -26,34 +26,28 @@ namespace AppUTH.Views.Grupos
     {
         private FirebaseClient firebaseClient = new FirebaseClient("https://apputh-b2336-default-rtdb.firebaseio.com/");
         private Models.Group grupoSeleccionado;
-        public  event PropertyChangedEventHandler PropertyChanged;
-
-        //-----------------------------------------
-        Plugin.Media.Abstractions.MediaFile photo = null;
-        
+        public  event PropertyChangedEventHandler PropertyChanged;     
+        Plugin.Media.Abstractions.MediaFile photo = null;        
         String video = "";
-
         private AudioRecorderService audioRecorderService = new AudioRecorderService();
         private readonly AudioPlayer audioPlayer = new AudioPlayer();
         public string pathaudio, filename;
+        private Command viewMultimediaCommand;
+        public Command ViewMultimediaCommand => viewMultimediaCommand ?? (viewMultimediaCommand = new Command(OnViewMultimediaCommand));
+        private Command deleteMultimediaCommand;
+        public Command DeleteMultimediaCommand => deleteMultimediaCommand ?? (deleteMultimediaCommand = new Command(OnDeleteMultimediaCommand));
 
         public PageGrupo(Models.Group grupoSeleccionado)
         {
             InitializeComponent();
             this.grupoSeleccionado = grupoSeleccionado;
-            LabelNombreGrupo.Text = grupoSeleccionado.Name;
+            LabelNombreGrupo.Text = "Bienvenidos al grupo de: " + grupoSeleccionado.Name;
             LabelCantidadPersonas.Text = "Cantidad de personas en el grupo: " + grupoSeleccionado.Participants.Count;
             // Asignar el origen de datos al ListView
             listViewMultimedia.ItemsSource = grupoSeleccionado.Multimedia;
             // Establecer el BindingContext para los comandos
             BindingContext = this;
         }
-
-        private async void OnCloseButtonClicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync();
-        }
-        //-----------------------------------------
 
         private async void OnTakePhotoButtonClicked(object sender, EventArgs e)
         {
@@ -114,11 +108,12 @@ namespace AppUTH.Views.Grupos
             listViewMultimedia.ItemsSource = grupoSeleccionado.Multimedia;
             await DisplayAlert("Éxito", "Foto subida correctamente.", "OK");
         }
+
+
         private  void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        //-----------------------------------------
 
         private async void OnTakeVideoButtonClicked(object sender, EventArgs e)
         {
@@ -188,7 +183,6 @@ namespace AppUTH.Views.Grupos
             await DisplayAlert("Éxito", "Video subido correctamente.", "OK");
         }
 
-        //-----------------------------------------
         private async void OnStartRecordingAudioButtonClicked(object sender, EventArgs e)
         {
             var permiso = await Permissions.RequestAsync<Permissions.Microphone>();
@@ -283,7 +277,6 @@ namespace AppUTH.Views.Grupos
             await DisplayAlert("Éxito", "Audio subido correctamente.", "OK");
         }
 
-        //-----------------------------------
         private string GetCurrentUser()
         {
             // Obtener el nombre del usuario actual desde la clase UserData
@@ -328,7 +321,6 @@ namespace AppUTH.Views.Grupos
                 return null;
             }
         }
-        //-----------------------------------
         private async void OnViewMultimediaCommand(object multimedia)
         {
             var selectedMultimedia = multimedia as MultimediaEntry;
@@ -350,48 +342,54 @@ namespace AppUTH.Views.Grupos
                     break;
             }
         }
-
-        private Command viewMultimediaCommand;
-        public Command ViewMultimediaCommand => viewMultimediaCommand ?? (viewMultimediaCommand = new Command(OnViewMultimediaCommand));
-
-        private Command deleteMultimediaCommand;
-        public Command DeleteMultimediaCommand => deleteMultimediaCommand ?? (deleteMultimediaCommand = new Command(OnDeleteMultimediaCommand));
+       
         private async void OnDeleteMultimediaCommand(object multimedia)
         {
             var selectedMultimedia = multimedia as MultimediaEntry;
-            grupoSeleccionado.Multimedia.Remove(selectedMultimedia);
 
-            // Eliminar el elemento multimedia de Firebase Storage y la base de datos
-            if (!string.IsNullOrEmpty(selectedMultimedia.FileUrl))
+            bool result = await DisplayAlert("Confirmar Eliminación", "¿Estás seguro de que deseas eliminar este multimedia?", "Sí", "No");
+
+            if (result)
             {
-                if (selectedMultimedia.FileUrl.StartsWith("https://"))
+                grupoSeleccionado.Multimedia.Remove(selectedMultimedia);
+
+                // Eliminar el elemento multimedia de Firebase Storage y la base de datos
+                if (!string.IsNullOrEmpty(selectedMultimedia.FileUrl))
                 {
-                    await DeleteMultimediaFromStorage(selectedMultimedia.FileUrl);
+                    if (selectedMultimedia.FileUrl.StartsWith("https://"))
+                    {
+                        await DeleteMultimediaFromStorage(selectedMultimedia.FileUrl);
+                    }
+
+                    // Crear el objeto del grupo con la lista actualizada de multimedia
+                    Models.Group updatedGroup = new Models.Group
+                    {
+                        IdGrupo = grupoSeleccionado.IdGrupo,
+                        Name = grupoSeleccionado.Name,
+                        Participants = grupoSeleccionado.Participants,
+                        Multimedia = grupoSeleccionado.Multimedia
+                    };
+
+                    // Guardar el grupo actualizado en Firebase
+                    await UpdateGroup(updatedGroup);
+
+                    // Eliminar la entrada de multimedia de la base de datos de Firebase Realtime Database
+                    await firebaseClient
+                        .Child("grupos")
+                        .Child(grupoSeleccionado.IdGrupo)
+                        .Child("Multimedia")
+                        .Child(selectedMultimedia.FileUrl.GetHashCode().ToString()) // Utilizamos el hash de la URL como clave del nodo
+                        .DeleteAsync();
+
+                    // Notificar a la interfaz de usuario que la lista ha sido actualizada
+                    OnPropertyChanged(nameof(grupoSeleccionado.Multimedia));
+                    listViewMultimedia.ItemsSource = null;
+                    listViewMultimedia.ItemsSource = grupoSeleccionado.Multimedia;
                 }
-
-                // Crear el objeto del grupo con la lista actualizada de multimedia
-                Models.Group updatedGroup = new Models.Group
-                {
-                    IdGrupo = grupoSeleccionado.IdGrupo,
-                    Name = grupoSeleccionado.Name,
-                    Participants = grupoSeleccionado.Participants,
-                    Multimedia = grupoSeleccionado.Multimedia
-                };
-
-                // Guardar el grupo actualizado en Firebase
-                await UpdateGroup(updatedGroup);
-
-                // Eliminar la entrada de multimedia de la base de datos de Firebase Realtime Database
-                await firebaseClient
-                    .Child("grupos")
-                    .Child(grupoSeleccionado.IdGrupo)
-                    .Child("Multimedia")
-                    .Child(selectedMultimedia.FileUrl.GetHashCode().ToString()) // Utilizamos el hash de la URL como clave del nodo
-                    .DeleteAsync();
-                // Notificar a la interfaz de usuario que la lista ha sido actualizada
-                OnPropertyChanged(nameof(grupoSeleccionado.Multimedia));               
-                listViewMultimedia.ItemsSource = null;
-                listViewMultimedia.ItemsSource = grupoSeleccionado.Multimedia;
+            }
+            else
+            {
+                // El usuario canceló la eliminación, no hacemos nada.
             }
         }
 

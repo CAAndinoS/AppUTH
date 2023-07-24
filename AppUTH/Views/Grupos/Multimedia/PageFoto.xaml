@@ -1,13 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppUTH.Views.Grupos.Multimedia.PageFoto">
+             x:Class="AppUTH.Views.Grupos.Multimedia.PageFoto"
+             BackgroundColor="#C9E0C3">
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                <Image x:Name="imagePreview" Aspect="AspectFit" />
-                <ActivityIndicator x:Name="progressBar" IsRunning="False" IsVisible="False" Color="Gray" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="CenterAndExpand"
+                     Padding="20">
+
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="CenterAndExpand"
+                         Spacing="10">
+
+                <Image x:Name="imagePreview" Aspect="AspectFit" HeightRequest="500" WidthRequest="500" />
+                <ActivityIndicator x:Name="progressBar" IsRunning="False" IsVisible="False" Color="Gray" />
+
             </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

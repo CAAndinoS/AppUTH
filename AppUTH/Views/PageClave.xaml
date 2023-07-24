@@ -1,10 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppUTH.Views.PageClave">
+             x:Class="AppUTH.Views.PageClave"
+             Background="#C9E0C3">
+
     <ContentPage.Content>
         <StackLayout Padding="15"
-                     VerticalOptions="Center">
+                     VerticalOptions="CenterAndExpand"
+                     Spacing="20"
+                     BackgroundColor="#C9E0C3">
+
             <Label Text="Recuperar Contraseña:"
                    FontSize="Large"
                    VerticalOptions="Center"
@@ -12,23 +17,37 @@
                    FontAttributes="Bold"
                    TextColor="Black">
             </Label>
-            <Entry Placeholder="Ingresa Tu Email:"
-                   BackgroundColor="White"
-                   PlaceholderColor="Black"
-                   x:Name="txtemail"></Entry>
+
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5">
+                <Entry Placeholder="Ingresa Tu Email:"
+                       BackgroundColor="Transparent"
+                       PlaceholderColor="Black"
+                       x:Name="txtemail" />
+            </Frame>
+
             <Button Text="Recuperar Clave"
                     x:Name="Buttonlink"
                     CornerRadius="30"
-                    BackgroundColor="Orange"
-                    Clicked="Buttonlink_Clicked">
-            </Button>
+                    BackgroundColor="#EF7D00"
+                    TextColor="White"
+                    HeightRequest="50"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center"
+                    Clicked="Buttonlink_Clicked" />
 
             <Button Text="Inicio De Sesión"
-                    BackgroundColor="Orange"
+                    BackgroundColor="#EF7D00"
                     CornerRadius="30"
                     x:Name="Buttonlink_1"
-                    Clicked="Buttonlink_1_Clicked">
-            </Button>
+                    TextColor="White"
+                    HeightRequest="50"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center"
+                    Clicked="Buttonlink_1_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

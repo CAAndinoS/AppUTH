@@ -1,20 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppUTH.Views.Amigos.PageMenuAmigos">
-  <!--Pages can be added as references or inline-->
-    
-    <ContentPage Title="Buscar">
-        <StackLayout>
-            <Entry x:Name="entryBusqueda" Placeholder="Buscar por nombre" TextChanged="EntryBusqueda_TextChanged" />
-            <ActivityIndicator x:Name="activityIndicator" IsRunning="{Binding IsSearching}" IsVisible="{Binding IsSearching}" />
-            <ListView x:Name="listViewNombres" ItemsSource="{Binding AlumnosFiltrados}">
+             x:Class="AppUTH.Views.Amigos.PageMenuAmigos"
+             BarBackgroundColor="#00843D"
+             BarTextColor="White">
+
+    <!--Pages can be added as references or inline-->
+
+    <ContentPage Title="Buscar" BackgroundColor="#C9E0C3">
+        <StackLayout Padding="20">
+            <Entry x:Name="entryBusqueda" Placeholder="Buscar por nombre" TextChanged="EntryBusqueda_TextChanged" BackgroundColor="#C9E0C3" PlaceholderColor="Gray" />
+            <ActivityIndicator x:Name="activityIndicator" IsRunning="{Binding IsSearching}" IsVisible="{Binding IsSearching}" Color="Gray" />
+            <ListView x:Name="listViewNombres" ItemsSource="{Binding AlumnosFiltrados}" BackgroundColor="#C9E0C3">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <Button Text="Agregar" BackgroundColor="Green" CommandParameter="{Binding .}" Clicked="ButtonAgregarAmigo_Clicked" />
-                                <Label Text="{Binding NombreAlumno}" VerticalOptions="Center" />
+                            <StackLayout Orientation="Horizontal" Padding="5,5">
+                                <Button Text="Agregar" BackgroundColor="#EF7D00" TextColor="White" CommandParameter="{Binding .}" Clicked="ButtonAgregarAmigo_Clicked" CornerRadius="10" Margin="5,0,0,0" />
+                                <Label Text="{Binding NombreAlumno}" VerticalOptions="CenterAndExpand" TextColor="Black" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -22,16 +25,16 @@
             </ListView>
         </StackLayout>
     </ContentPage>
-    
-    <ContentPage Title="Lista de Amigos" >
-        <StackLayout>
+
+    <ContentPage Title="Lista de Amigos" BackgroundColor="#C9E0C3">
+        <StackLayout Padding="20">
             <!-- ListView para mostrar los amigos -->
             <ListView x:Name="ListViewAmigos"
-          ItemsSource="{Binding ListaAmigos}"
-          HasUnevenRows="True">
+                      ItemsSource="{Binding ListaAmigos}"
+                      HasUnevenRows="True" BackgroundColor="#C9E0C3">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding NombreAmigo}" />
+                        <TextCell Text="{Binding NombreAmigo}" TextColor="Black" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

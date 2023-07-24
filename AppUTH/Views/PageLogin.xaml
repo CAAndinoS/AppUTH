@@ -1,32 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppUTH.Views.PageLogin">
+             x:Class="AppUTH.Views.PageLogin"
+             Background="#C9E0C3">
+    <NavigationPage.TitleView>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Label Text="Universidad Tecnológica de Honduras"
+                   HorizontalOptions="Center"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="White" />
+        </StackLayout>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout Padding="15"
-                     VerticalOptions="Center">
+                     VerticalOptions="Center"
+                     Spacing="20"
+                     BackgroundColor="#C9E0C3">
+
+            <StackLayout HorizontalOptions="Center">
+                <Image Source="uth.jpg" HeightRequest="250" WidthRequest="300" />
+            </StackLayout>
+
             <Label Text="Inicio De Sesión"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
                    FontSize="24"
                    FontAttributes="Bold"
-                   TextColor="Black"/>
+                   TextColor="Black" />
 
-            <Entry Placeholder="Escribe Tu Correo:" PlaceholderColor="Black" TextColor="Black"
-                   x:Name="txtemail" BackgroundColor="White"/>
-            <Entry Placeholder="Escribe Tu Clave:" BackgroundColor="White" PlaceholderColor="Black" TextColor="Black"
-                   x:Name="txtclave"
-                   IsPassword="True"></Entry>
-            <Button Text="Iniciar De Sesión "
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="0"
+                   Margin="0,5">
+                <Entry Placeholder="Escribe Tu Correo:"
+                       PlaceholderColor="Black"
+                       TextColor="Black"
+                       x:Name="txtemail"
+                       BackgroundColor="Transparent" />
+            </Frame>
+
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="0"
+                   Margin="0,5">
+                <Entry Placeholder="Escribe Tu Clave:"
+                       PlaceholderColor="Black"
+                       TextColor="Black"
+                       x:Name="txtclave"
+                       IsPassword="True"
+                       BackgroundColor="Transparent" />
+            </Frame>
+
+            <Button Text="Iniciar De Sesión"
                     x:Name="BtnSigIn"
-                    CornerRadius="15"
-                    BackgroundColor="Orange"
+                    CornerRadius="20"
+                    BackgroundColor="#EF7D00"
                     BorderColor="White"
-                    Clicked="BtnSigIn_Clicked">
-            </Button>
+                    BorderWidth="1"
+                    Clicked="BtnSigIn_Clicked"
+                    TextColor="White"
+                    HeightRequest="50"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center" />
 
-
-            <Grid Margin="1">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -48,12 +87,9 @@
                         <TapGestureRecognizer
                             x:Name="registertap"
                             Tapped="registertap_Tapped">
-
                         </TapGestureRecognizer>
                     </Label.GestureRecognizers>
-
                 </Label>
-
 
                 <Label Text="¿OLVIDO SU CONTRASEÑA?"
                        Grid.Row="0"
@@ -66,15 +102,11 @@
                         <TapGestureRecognizer
                             x:Name="recuperarclavetap"
                             Tapped="recuperarclavetap_Tapped">
-
                         </TapGestureRecognizer>
                     </Label.GestureRecognizers>
-
                 </Label>
-
-
             </Grid>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+

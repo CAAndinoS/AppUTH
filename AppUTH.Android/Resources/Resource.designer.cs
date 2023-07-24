@@ -21406,6 +21406,9 @@ namespace AppUTH.Droid
 			// aapt resource value: 0x7F0700BD
 			public const int unir = 2131165373;
 			
+			// aapt resource value: 0x7F0700BE
+			public const int uth = 2131165374;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

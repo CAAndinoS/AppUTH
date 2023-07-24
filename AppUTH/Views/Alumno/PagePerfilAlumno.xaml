@@ -1,74 +1,100 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppUTH.Views.Alumno.PagePerfilAlumno">
-    <ScrollView>
-        <StackLayout BackgroundColor="White"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            WidthRequest="600" HeightRequest="1200">
-            <Label Text="Perfil Cliente"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center"
-                   FontSize="42"
-                   Margin="30"
+             x:Class="AppUTH.Views.Alumno.PagePerfilAlumno"
+             BackgroundColor="#C9E0C3">
+
+    <ScrollView BackgroundColor="#C9E0C3">
+        <StackLayout BackgroundColor="#C9E0C3"
+                     VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="CenterAndExpand"
+                     WidthRequest="600"
+                     Spacing="20"
+                     Margin="20"
+                     Padding="20">
+
+            <Label Text="Perfil Alumno"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   FontSize="32"
                    FontAttributes="Bold"
-                   TextColor="Orange"/>
+                   TextColor="#EF7D00" />
 
-            <StackLayout >
-                <Image x:Name="Foto" BackgroundColor="Black" Margin="50" WidthRequest="200" HeightRequest="350"/>
-                <Button x:Name="btnFoto" 
-                Text="Tomar Foto" 
-                    Grid.Column="0" 
-                   Grid.Row="3"
-                    BackgroundColor="Orange"
+            <Frame BackgroundColor="#F8F8F8"
+                   CornerRadius="10"
+                   Padding="5"
+                   HeightRequest="250">
+                <Image x:Name="Foto"
+                       BackgroundColor="Black"
+                       Aspect="AspectFill" />
+            </Frame>
+
+            <Button x:Name="btnFoto" 
+                    Text="Tomar Foto" 
+                    BackgroundColor="#EF7D00"
                     TextColor="White"
                     FontSize="16"
                     CornerRadius="30"
-                     TextTransform="None"
-                    Margin="30,0,30,50"   
-                Clicked="btnFoto_Clicked"/>
-            </StackLayout>
+                    TextTransform="None"
+                    Clicked="btnFoto_Clicked"
+                    HeightRequest="50" />
 
-            <Entry Placeholder="Nombre.."
-                   x:Name="txtnombre"
-                   PlaceholderColor="Orange"
-                   TextColor="Black"
-                   Margin="30,0,30,20"
-                   ></Entry>
-            <Entry Placeholder="Email.."
-                   x:Name="txtemail"
-                    PlaceholderColor="Orange"
-                   TextColor="Black"
-                   Margin="30,0,30,20"
-                   IsReadOnly="True"></Entry>
-            <Entry Placeholder="Telefono.."
-                   x:Name="txttelefono"
-                   PlaceholderColor="Orange"
-                   TextColor="Black"
-                   Margin="30,0,30,20"
-                   Keyboard="Numeric"
-                   MaxLength="8"></Entry>
-            <Entry Placeholder="Direccion.."
-                   PlaceholderColor="Orange"
-                   TextColor="Black"
-                   x:Name="txtdireccion"
-                   Margin="30,0,30,20"></Entry>
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5">
+                <Entry Placeholder="Nombre.."
+                       x:Name="txtnombre"
+                       PlaceholderColor="#00843D"
+                       TextColor="Black"
+                       FontSize="16" />
+            </Frame>
 
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5">
+                <Entry Placeholder="Email.."
+                       x:Name="txtemail"
+                       PlaceholderColor="#00843D"
+                       TextColor="Black"
+                       IsReadOnly="True"
+                       FontSize="16" />
+            </Frame>
 
-            <Button Text="Actualizar" x:Name="Buttoactualizar"
-                    Grid.Column="0" 
-                   Grid.Row="3"
-                    BackgroundColor="Orange"
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5">
+                <Entry Placeholder="Teléfono.."
+                       x:Name="txttelefono"
+                       PlaceholderColor="#00843D"
+                       TextColor="Black"
+                       Keyboard="Numeric"
+                       MaxLength="8"
+                       FontSize="16" />
+            </Frame>
+
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5">
+                <Entry Placeholder="Dirección.."
+                       PlaceholderColor="#00843D"
+                       TextColor="Black"
+                       x:Name="txtdireccion"
+                       FontSize="16" />
+            </Frame>
+
+            <Button Text="Actualizar"
+                    x:Name="Buttoactualizar"
+                    BackgroundColor="#EF7D00"
                     TextColor="White"
-                    FontSize="16"
+                    FontSize="18"
                     CornerRadius="30"
-                     TextTransform="None"
-                    Margin="30,0,30,50" 
-                Clicked="Buttoactualizar_Clicked"></Button>
+                    TextTransform="None"
+                    Clicked="Buttoactualizar_Clicked"
+                    HeightRequest="50" />
 
         </StackLayout>
-
-
     </ScrollView>
 </ContentPage>
+
+
+

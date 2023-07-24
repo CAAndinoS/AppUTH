@@ -1,14 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppUTH.Views.Grupos.Multimedia.PageAudio">
+             x:Class="AppUTH.Views.Grupos.Multimedia.PageAudio"
+             BackgroundColor="#C9E0C3">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-            <Label Text="Reproduciendo audio" HorizontalOptions="CenterAndExpand" />
-            <Button Text="Reproducir" Clicked="PlayAudio_Clicked" />
-            <Button Text="Detener" Clicked="StopAudio_Clicked" />
-            <Button Text="Descargar Audio" Clicked="OnDownloadButtonClicked" />
-            <ProgressBar x:Name="progressBar" Progress="0" IsVisible="False" IsEnabled="False" />
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="20">
+
+            <Label Text="Reproduciendo audio"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="Black" />
+
+            <Button Text="Reproducir"
+                    Clicked="PlayAudio_Clicked"
+                    BackgroundColor="#EF7D00"
+                    TextColor="White"
+                    CornerRadius="10" />
+
+            <Button Text="Detener"
+                    Clicked="StopAudio_Clicked"
+                    BackgroundColor="#EF7D00"
+                    TextColor="White"
+                    CornerRadius="10" />
+
+            <Button Text="Descargar Audio"
+                    Clicked="OnDownloadButtonClicked"
+                    BackgroundColor="#EF7D00"
+                    TextColor="White"
+                    CornerRadius="10" />
+
+            <ProgressBar x:Name="progressBar"
+                         Progress="0"
+                         IsVisible="False"
+                         IsEnabled="False"
+                         HeightRequest="10"
+                         ProgressColor="#EF7D00" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

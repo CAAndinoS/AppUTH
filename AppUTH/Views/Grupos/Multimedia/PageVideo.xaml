@@ -2,13 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:octane="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer"
-             x:Class="AppUTH.Views.Grupos.Multimedia.PageVideo">
+             x:Class="AppUTH.Views.Grupos.Multimedia.PageVideo"
+             BackgroundColor="#C9E0C3">
 
     <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <octane:VideoPlayer x:Name="videoPlayer"
                                 VerticalOptions="FillAndExpand"
                                 HorizontalOptions="FillAndExpand"
                                 AutoPlay="True"                 
-                                Source="{Binding VideoSource}" />
+                                Source="{Binding VideoSource}" 
+                                BackgroundColor="Black"/>
     </StackLayout>
 </ContentPage>

@@ -2,50 +2,56 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
             xmlns:mm="clr-namespace:MediaManager.Forms;assembly=MediaManager.Forms"
-            x:Class="AppUTH.Views.Grupos.PageGrupo">
-  <!--Pages can be added as references or inline-->
-  <ContentPage Title="Tab 1">
+            x:Class="AppUTH.Views.Grupos.PageGrupo"
+            BarBackgroundColor="#00843D"
+            BarTextColor="White">
+
+    <!--Pages can be added as references or inline-->
+    <ContentPage Title="Inicio"
+                 BackgroundColor="#C9E0C3">
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-            <Label x:Name="LabelNombreGrupo" FontSize="24" Margin="0,20" />
-            <Label x:Name="LabelCantidadPersonas" FontSize="18" Margin="0,5" />
-            <Button Text="Cerrar" Clicked="OnCloseButtonClicked" BackgroundColor="Gray" TextColor="White" Margin="20,0" />
-        </StackLayout>
-  </ContentPage>
-  
-    
-  <ContentPage Title="Tab 2">
-        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-            <Image x:Name="imagePreview" HeightRequest="200" WidthRequest="200" Margin="0,20" />
-            <Button Text="Tomar Foto" Clicked="OnTakePhotoButtonClicked" />
-            <Button x:Name="BtnUploadPhoto" Text="Subir Foto" Clicked="OnUploadPhotoButtonClicked" />
-        </StackLayout>
-    </ContentPage>
-    
-  <ContentPage Title="Tab 3">
-        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-            <Button Text="Tomar Video" Clicked="OnTakeVideoButtonClicked" />
-            <Button Text="Subir Video" Clicked="OnUploadVideoButtonClicked" />
-            <mm:VideoView x:Name="videoPreview" HeightRequest="300" WidthRequest="200" BackgroundColor="#A9BFC4" IsFullWindow="False" ShowControls="True" Margin="10,10,10,0" />
+            <Label x:Name="LabelNombreGrupo" FontSize="24" Margin="0,20" TextColor="Black" />
+            <Label x:Name="LabelCantidadPersonas" FontSize="18" Margin="0,5" TextColor="Black" />
         </StackLayout>
     </ContentPage>
 
-    <ContentPage Title="Tab 4">
+    <ContentPage Title="Foto"
+                 BackgroundColor="#C9E0C3">
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-            <Button Text="Grabar Audio" Clicked="OnStartRecordingAudioButtonClicked" />
-            <Button Text="Detener Grabación" Clicked="OnStopRecordingAudioButtonClicked" />
-            <Button Text="Reproducir Audio" Clicked="OnPlayAudioButtonClicked" />
-            <Button Text="Subir Audio" Clicked="OnUploadAudioButtonClicked" />
+            <Image x:Name="imagePreview" HeightRequest="500" WidthRequest="500" Margin="0,5" />
+            <Button Text="Tomar Foto" Clicked="OnTakePhotoButtonClicked" BackgroundColor="#EF7D00" TextColor="White" />
+            <Button x:Name="BtnUploadPhoto" Text="Subir Foto" Clicked="OnUploadPhotoButtonClicked" BackgroundColor="#EF7D00" TextColor="White" />
         </StackLayout>
     </ContentPage>
 
-    <ContentPage Title="Tab 5">
+    <ContentPage Title="Video"
+                 BackgroundColor="#C9E0C3">
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <mm:VideoView x:Name="videoPreview" HeightRequest="500" WidthRequest="500" BackgroundColor="#A9BFC4" IsFullWindow="False" ShowControls="True" Margin="10,10,10,0" />
+            <Button Text="Tomar Video" Clicked="OnTakeVideoButtonClicked" BackgroundColor="#EF7D00" TextColor="White" />
+            <Button Text="Subir Video" Clicked="OnUploadVideoButtonClicked" BackgroundColor="#EF7D00" TextColor="White" />
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage Title="Audio"
+                 BackgroundColor="#C9E0C3">
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Button Text="Grabar Audio" Clicked="OnStartRecordingAudioButtonClicked" BackgroundColor="#EF7D00" TextColor="White" />
+            <Button Text="Detener Grabación" Clicked="OnStopRecordingAudioButtonClicked" BackgroundColor="#EF7D00" TextColor="White" />
+            <Button Text="Reproducir Audio" Clicked="OnPlayAudioButtonClicked" BackgroundColor="#EF7D00" TextColor="White" />
+            <Button Text="Subir Audio" Clicked="OnUploadAudioButtonClicked" BackgroundColor="#EF7D00" TextColor="White" />
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage Title="Lista"
+                 BackgroundColor="#C9E0C3">
         <StackLayout>
-            <ListView x:Name="listViewMultimedia" ItemsSource="{Binding Multimedia}" HasUnevenRows="True">
+            <ListView x:Name="listViewMultimedia" ItemsSource="{Binding Multimedia}" HasUnevenRows="True" BackgroundColor="#C9E0C3">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
-                                <SwipeView>
+                                <SwipeView BackgroundColor="#C9E0C3">
                                     <SwipeView.RightItems>
                                         <SwipeItems>
                                             <SwipeItem Text="Ver" IconImageSource="eye.png" BackgroundColor="LightSkyBlue"
@@ -57,8 +63,8 @@
                                         </SwipeItems>
                                     </SwipeView.RightItems>
                                     <StackLayout Padding="10">
-                                        <Label Text="{Binding Type}" FontSize="18" />
-                                        <Label Text="{Binding UploadedBy}" FontSize="14" />
+                                        <Label Text="{Binding Type}" FontSize="18" TextColor="Black" />
+                                        <Label Text="{Binding UploadedBy}" FontSize="14" TextColor="Black" />
                                     </StackLayout>
                                 </SwipeView>
                             </Grid>

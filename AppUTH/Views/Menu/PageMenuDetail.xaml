@@ -2,8 +2,34 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppUTH.Views.Menu.PageMenuDetail"
-             Title="Detail">
-  <StackLayout Padding="10">
-    <Label Text="This is a detail page. To get the 'triple' line icon on each platform add a icon to each platform and update the 'Flyout' page with an Icon that references it."/>
-  </StackLayout>
+             Title="Inicio"
+             BackgroundColor="#C9E0C3">
+
+    <ScrollView>
+        <StackLayout Padding="20">
+            <Label Text="Bienvenido a la aplicación de la UTH. Aquí tienes algunas reglas generales para tu uso de la App."
+                   FontSize="18"
+                   TextColor="#00843D" />
+
+            <Label Text="Propósito del grupo: Utiliza el grupo de manera acorde a su propósito original. Si es un grupo para un proyecto específico, tema o actividad, asegúrate de compartir solo contenido relevante y relacionado."
+                   FontSize="16"
+                   TextColor="#333333"
+                   Margin="0,10,0,0" />
+
+            <Label Text="No spam: Evita enviar mensajes o archivos irrelevantes o repetitivos que puedan considerarse spam. El spam puede molestar a los demás miembros y dificultar la comunicación efectiva dentro del grupo."
+                   FontSize="16"
+                   TextColor="#333333"
+                   Margin="0,10,0,0" />
+
+            <Label Text="Tamaño de archivos: Ten en cuenta el tamaño de los archivos multimedia que compartes, especialmente si hay restricciones de almacenamiento o ancho de banda en la aplicación. Si es necesario, comprime los archivos antes de compartirlos para evitar problemas de espacio y velocidad de carga."
+                   FontSize="16"
+                   TextColor="#333333"
+                   Margin="0,10,0,0" />
+
+            <Label Text="Mantén el enfoque: Evita desviarte del tema principal del grupo en las discusiones. Si deseas hablar sobre algo que no esté relacionado, considera crear un nuevo grupo o hablar en privado con los interesados."
+                   FontSize="16"
+                   TextColor="#333333"
+                   Margin="0,10,0,0" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
