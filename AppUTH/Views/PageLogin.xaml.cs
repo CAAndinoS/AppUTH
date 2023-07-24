@@ -57,7 +57,7 @@ namespace AppUTH.Views
 
             try
             {
-                string email = txtemail.Text;
+                string email = txtemail.Text.Trim();
                 string clave = txtclave.Text;
 
                 if (String.IsNullOrEmpty(email))

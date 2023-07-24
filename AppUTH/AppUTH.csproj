@@ -12,9 +12,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FirebaseAdmin" Version="2.4.0" />
     <PackageReference Include="FirebaseAuthentication.net" Version="3.7.2" />
     <PackageReference Include="FirebaseDatabase.net" Version="4.1.0" />
     <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
+    <PackageReference Include="MailKit" Version="4.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Octane.Xam.VideoPlayer" Version="3.1.0" />
     <PackageReference Include="Plugin.AudioRecorder" Version="1.1.0" />
@@ -29,6 +31,9 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Views\Alumno\PagePerfilAlumno.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Amigos\PageMenuAmigos.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Grupos\Menu Grupos\PageMenuGrupos.xaml">

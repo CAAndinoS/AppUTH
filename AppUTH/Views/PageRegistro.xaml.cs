@@ -25,9 +25,9 @@ namespace AppUTH.Views
             {
 
                 string nombre = txtnombre.Text;
-                string email = txtemail.Text;
-                string clave = txtclave.Text;
-                string confirclave = txtconfirmclave.Text;
+                string email = txtemail.Text.Trim();
+                string clave = txtclave.Text.Trim();
+                string confirclave = txtconfirmclave.Text.Trim();
 
                 if (String.IsNullOrEmpty(nombre))
                 {

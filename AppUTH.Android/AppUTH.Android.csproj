@@ -55,6 +55,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FirebaseAdmin">
+      <Version>2.4.0</Version>
+    </PackageReference>
     <PackageReference Include="FirebaseAuthentication.net">
       <Version>3.7.2</Version>
     </PackageReference>
@@ -63,6 +66,9 @@
     </PackageReference>
     <PackageReference Include="FirebaseStorage.net">
       <Version>1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="MailKit">
+      <Version>4.1.0</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
@@ -131,6 +137,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\eye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\unir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\agregar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

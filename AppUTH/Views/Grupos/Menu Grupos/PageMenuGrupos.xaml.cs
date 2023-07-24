@@ -139,6 +139,7 @@ namespace AppUTH.Views.Menu_Grupos
             }).Where(grupo => grupo.Participants.Any(p => p.CorreoAlumno == currentUserEmail)).ToList();
 
             // Asignar los grupos en los que está inscrito al ListView
+            GruposInscritosListView.ItemsSource = null;
             GruposInscritosListView.ItemsSource = gruposInscritos;
         }
 
@@ -152,6 +153,38 @@ namespace AppUTH.Views.Menu_Grupos
 
             // Desmarcar el elemento seleccionado en la lista
             ((ListView)sender).SelectedItem = null;
+        }
+
+        private async void OnEliminarInvoked(object sender, EventArgs e)
+        {
+            var swipeItem = (SwipeItem)sender;
+            var grupoSeleccionado = (Models.Group)swipeItem.CommandParameter;
+
+            bool eliminar = await DisplayAlert("Confirmación", $"¿Desea eliminar el grupo '{grupoSeleccionado.Name}'?", "Sí", "No");
+
+            if (eliminar)
+            {
+                // Eliminar el grupo de Firebase Realtime Database y de la lista de grupos inscritos
+                await DeleteGroup(grupoSeleccionado);
+                await DisplayAlert("Información", "El grupo ha sido eliminado.", "OK");
+
+                // Actualizar la lista de grupos inscritos después de eliminar el grupo
+                LoadGroups();
+                LoadGruposInscritos();
+            }
+        }
+
+        private async Task DeleteGroup(Models.Group group)
+        {
+            try
+            {
+                // Eliminar el grupo de Firebase Realtime Database
+                await firebaseClient.Child("grupos").Child(group.IdGrupo).DeleteAsync();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Error al eliminar el grupo: {ex.Message}", "OK");
+            }
         }
     }   
 }

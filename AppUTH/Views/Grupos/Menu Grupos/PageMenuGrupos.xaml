@@ -19,7 +19,8 @@
                             <SwipeView>
                                 <SwipeView.RightItems>
                                     <SwipeItems>
-                                        <SwipeItem Text="Unirse" BackgroundColor="Green" CommandParameter="{Binding .}" Invoked="OnUnirseInvoked" />
+                                        <SwipeItem Text="Unirse" IconImageSource="unir.png" BackgroundColor="Green" CommandParameter="{Binding .}" Invoked="OnUnirseInvoked" />
+                                        <SwipeItem Text="Eliminar" IconImageSource="trash.png" BackgroundColor="Red" CommandParameter="{Binding .}" Invoked="OnEliminarInvoked" />
                                     </SwipeItems>
                                 </SwipeView.RightItems>
 

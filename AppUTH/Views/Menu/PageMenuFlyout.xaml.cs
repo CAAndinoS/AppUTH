@@ -1,4 +1,5 @@
 ﻿using AppUTH.Views.Alumno;
+using AppUTH.Views.Amigos;
 using AppUTH.Views.Menu_Grupos;
 using System;
 using System.Collections.Generic;
@@ -37,8 +38,8 @@ namespace AppUTH.Views.Menu
                 {
                     new PageMenuFlyoutMenuItem { Id = 0, Title = "Page 1"},
                     new PageMenuFlyoutMenuItem { Id = 1, Title = "Page 2" },
-                    new PageMenuFlyoutMenuItem { Id = 2, Title = "Page 3" },
-                    new PageMenuFlyoutMenuItem { Id = 3, Title = "Page 4", TargetType = typeof(PageMenuGrupos) },
+                    new PageMenuFlyoutMenuItem { Id = 2, Title = "Amigos", TargetType = typeof(PageMenuAmigos) },
+                    new PageMenuFlyoutMenuItem { Id = 3, Title = "Grupos", TargetType = typeof(PageMenuGrupos) },
                     new PageMenuFlyoutMenuItem { Id = 4, Title = "Perfil", TargetType = typeof(PagePerfilAlumno)},
                 });
             }

@@ -66,4 +66,4 @@ namespace AppUTH.Service
             return true;
         }
     }
-}
+}//SendVerificationEmailAsync

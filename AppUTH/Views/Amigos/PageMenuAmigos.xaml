@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppUTH.Views.Amigos.PageMenuAmigos">
+  <!--Pages can be added as references or inline-->
+    
+    <ContentPage Title="Buscar">
+        <StackLayout>
+            <Entry x:Name="entryBusqueda" Placeholder="Buscar por nombre" TextChanged="EntryBusqueda_TextChanged" />
+            <ActivityIndicator x:Name="activityIndicator" IsRunning="{Binding IsSearching}" IsVisible="{Binding IsSearching}" />
+            <ListView x:Name="listViewNombres" ItemsSource="{Binding AlumnosFiltrados}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Button Text="Agregar" BackgroundColor="Green" CommandParameter="{Binding .}" Clicked="ButtonAgregarAmigo_Clicked" />
+                                <Label Text="{Binding NombreAlumno}" VerticalOptions="Center" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+    
+    <ContentPage Title="Lista de Amigos" >
+        <StackLayout>
+            <!-- ListView para mostrar los amigos -->
+            <ListView x:Name="ListViewAmigos"
+          ItemsSource="{Binding ListaAmigos}"
+          HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding NombreAmigo}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>
