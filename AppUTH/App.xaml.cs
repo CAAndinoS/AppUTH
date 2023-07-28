@@ -1,5 +1,7 @@
-﻿using AppUTH.Views;
+﻿using AppUTH.Singleton;
+using AppUTH.Views;
 using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,6 +19,13 @@ namespace AppUTH
 
         protected override void OnStart()
         {
+            base.OnStart();
+
+            if (Preferences.ContainsKey("token"))
+            {
+                UserData.CurrentUserEmail = Preferences.Get("userEmail", string.Empty);
+                UserData.FirebaseToken = Preferences.Get("token", string.Empty);
+            }
         }
 
         protected override void OnSleep()

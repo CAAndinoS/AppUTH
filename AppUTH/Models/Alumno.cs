@@ -12,6 +12,7 @@ namespace AppUTH.Models
         public string Telefono { get; set; }
         public string Direccion { get; set; }
         public string Foto { get; set; }
-        public List<Amigo> ListaAmigos { get; set; }
+        // Lista de amigos directamente en el perfil del Alumno
+        public List<Amigo> ListaAmigos { get; set; } = new List<Amigo>();
     }
 }

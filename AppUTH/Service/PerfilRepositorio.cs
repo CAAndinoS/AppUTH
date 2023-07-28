@@ -61,7 +61,7 @@ namespace AppUTH.Service
         public async Task<int> ObtenerID_Alumno()
         {
             var id = (await firebaseperfil
-            .Child("clientes")
+            .Child("alumnos")
                             .OnceAsync<Alumno>()).Select(c => {
                                 Clientekey = c.Key;
                                 return c.Object;

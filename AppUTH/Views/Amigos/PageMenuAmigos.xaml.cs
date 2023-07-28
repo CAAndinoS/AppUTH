@@ -37,6 +37,7 @@ namespace AppUTH.Views.Amigos
         {
             base.OnAppearing();
             await CargarAlumnos();
+            CargarListaAmigos();
             RealizarBusqueda();
         }
 
@@ -135,41 +136,40 @@ namespace AppUTH.Views.Amigos
                     // Obtener el perfil del usuario actual (creador del grupo)
                     Models.Alumno currentUserProfile = await perfilRepositorio.ObtenerAlumno(currentUserEmail);
 
-                    // Get the current logged-in student from wherever you store this information
-                    var currentUser = new Models.Alumno
-                    {
-                        IdAlumno = currentUserProfile.IdAlumno, // Replace this with the actual logged-in student's ID
-                        NombreAlumno = currentUserProfile.NombreAlumno // Replace this with the actual logged-in student's name
-                    };
+                    // Resto del código...
 
-                    // Check if the selected student is the same as the current logged-in student
-                    if (selectedAlumno.IdAlumno == currentUser.IdAlumno)
+                    // Check if the selected student is not already a friend of the current logged-in student
+                    var isAlreadyFriend = currentUserProfile.ListaAmigos.Any(a => a.IdAmigo == selectedAlumno.IdAlumno);
+                    if (isAlreadyFriend)
                     {
-                        // If the selected student is the same as the current logged-in student, show an error message
-                        await DisplayAlert("Error", "No puedes enviar una solicitud de amistad a ti mismo.", "Aceptar");
+                        // If the selected student is already a friend, show a message to the user
+                        await DisplayAlert("Amigo Existente", $"{selectedAlumno.NombreAlumno} ya es tu amigo.", "Aceptar");
                     }
                     else
                     {
-                        // Check if the selected student is already a friend of the current logged-in student
-                        var isAlreadyFriend = await IsFriend(currentUser, selectedAlumno);
-                        if (isAlreadyFriend)
-                        {
-                            // If the selected student is already a friend, show a message to the user
-                            await DisplayAlert("Amigo Existente", $"{selectedAlumno.NombreAlumno} ya es tu amigo.", "Aceptar");
-                        }
-                        else
-                        {
-                            // If the selected student is not already a friend, proceed to add them
-                            await AddFriend(selectedAlumno, currentUser);
-                            await AddFriend(currentUser, selectedAlumno);
-                            CargarListaAmigos();
-                            // Show a success message to the user
-                            await DisplayAlert("Amigo Agregado", $"{selectedAlumno.NombreAlumno} ha sido agregado como amigo.", "Aceptar");
-                        }
+                        // If the selected student is not already a friend, proceed to add them
+                        currentUserProfile.ListaAmigos.Add(new Amigo { IdAmigo = selectedAlumno.IdAlumno, NombreAmigo = selectedAlumno.NombreAlumno });
+
+                        // Guardar el perfil actualizado del Alumno actual
+                        await perfilRepositorio.UpdatePerfil(currentUserProfile);
+
+                        // Obtener el perfil completo del Alumno seleccionado
+                        Models.Alumno selectedUserProfile = await perfilRepositorio.ObtenerAlumno(selectedAlumno.Correo);
+                        // Actualizar su lista de amigos
+                        selectedUserProfile.ListaAmigos.Add(new Amigo { IdAmigo = currentUserProfile.IdAlumno, NombreAmigo = currentUserProfile.NombreAlumno });
+
+                        // Guardar el perfil actualizado del Alumno seleccionado
+                        await perfilRepositorio.UpdatePerfil(selectedUserProfile);
+
+                        CargarListaAmigos();
+
+                        // Show a success message to the user
+                        await DisplayAlert("Amigo Agregado", $"{selectedAlumno.NombreAlumno} ha sido agregado como amigo.", "Aceptar");
                     }
                 }
             }
         }
+
 
         private async Task<bool> IsFriend(Models.Alumno student, Models.Alumno potentialFriend)
         {
@@ -244,19 +244,10 @@ namespace AppUTH.Views.Amigos
                 string currentUserEmail = UserData.CurrentUserEmail;
                 // Obtener el perfil del usuario actual (creador del grupo)
                 Models.Alumno currentUserProfile = await perfilRepositorio.ObtenerAlumno(currentUserEmail);
-                // Obtén el alumno actualmente conectado desde donde almacenes esta información
-                var alumnoActual = new Models.Alumno
-                {
-                    IdAlumno = currentUserProfile.IdAlumno, // Reemplaza esto con el ID real del alumno conectado
-                    NombreAlumno = currentUserProfile.NombreAlumno // Reemplaza esto con el nombre real del alumno conectado
-                };
 
-                // Obtiene la lista actual de amigos del alumno desde Firebase
-                var firebasePerfil = new FirebaseClient("https://apputh-b2336-default-rtdb.firebaseio.com/");
-                var amigosSnapshot = await firebasePerfil.Child("amigos").Child(alumnoActual.IdAlumno.ToString()).OnceSingleAsync<GrupoAmigos>();
+                // Obtiene la lista actual de amigos del Alumno actual
+                ListaAmigos = currentUserProfile.ListaAmigos ?? new List<Amigo>();
 
-                // Obtiene la lista actual de amigos o crea una nueva si no existe
-                ListaAmigos = amigosSnapshot?.ListaAmigos ?? new List<Amigo>();
                 // Actualiza el ListView con la nueva lista de amigos
                 ListViewAmigos.ItemsSource = ListaAmigos;
             }
@@ -267,6 +258,8 @@ namespace AppUTH.Views.Amigos
             }
         }
 
-        
+
+
+
     }
 }
