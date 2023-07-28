@@ -136,9 +136,14 @@ namespace AppUTH.Views.Amigos
                     // Obtener el perfil del usuario actual (creador del grupo)
                     Models.Alumno currentUserProfile = await perfilRepositorio.ObtenerAlumno(currentUserEmail);
 
-                    // Resto del código...
+                    // Check if the selected student is not the current logged-in student
+                    if (currentUserProfile.IdAlumno == selectedAlumno.IdAlumno)
+                    {
+                        await DisplayAlert("Error", "No puedes agregarte a ti mismo como amigo.", "Aceptar");
+                        return;
+                    }
 
-                    // Check if the selected student is not already a friend of the current logged-in student
+                    // Check if the selected student is already a friend of the current logged-in student
                     var isAlreadyFriend = currentUserProfile.ListaAmigos.Any(a => a.IdAmigo == selectedAlumno.IdAlumno);
                     if (isAlreadyFriend)
                     {
@@ -169,6 +174,7 @@ namespace AppUTH.Views.Amigos
                 }
             }
         }
+
 
 
         private async Task<bool> IsFriend(Models.Alumno student, Models.Alumno potentialFriend)
